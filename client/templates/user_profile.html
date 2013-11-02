@@ -1,0 +1,79 @@
+<template name="user_profile">
+  <div class="row">
+    <div class="col-sm-8">
+        <div class="row">
+          <div class="col-md-2">
+            Title:
+          </div>
+          <div class="col-md-10">
+            <p id="nanoTitle" class="editable" data-type="text" data-placeholder="Enter text" data-emptytext="Click to enter text" data-rows="4">{{title}}</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2">
+            Author:
+          </div>
+          <div class="col-md-10">
+            <p id="nanoAuthor" class="editable" data-type="text" data-placeholder="Enter text" data-emptytext="Click to enter text" data-rows="4">{{author}}</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2">
+            Summary:
+          </div>
+          <div class="col-md-10">
+            <p id="nanoSummary" class="editable" data-type="textarea" data-placeholder="Enter text" data-emptytext="Click to enter text" data-rows="8" >{{summary}}</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2">
+            Genre:
+          </div>
+          <div class="col-md-10">
+            <p id="nanoGenre" class="editable" data-type="select"  ></p>
+          </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="row">
+        <div class="col-sm-12">
+          <h4>Upload:</h4>
+          <textarea id="nano_stage" class="form-control" rows="15"></textarea><br>
+          <button class="btn btn-primary save-part col-sm-12">Save</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <ul>
+            {{#each stages}}
+              <li>{{prettifyDateTime created}}</li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+<hr>
+
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <div class="row">
+      <div class="col-sm-12">
+        <h3>Word Count<a href="{{pathFor 'stats'}}" class="btn btn-success col-sm-2 pull-right">See all stats</a></h3>
+      </div>
+    </div>
+    <div id="wordCountChart"></div>
+  </div>
+</div>
+
+<h3>Read It</h3>
+{{#each stages}}
+  <h4>{{prettifyDateTime created}}</h4>
+  <p>{{breaklines text}}</p>
+{{/each}}
+</template>

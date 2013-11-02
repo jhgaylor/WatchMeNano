@@ -1,0 +1,15 @@
+{
+  "meteor": {
+    "git": "https://github.com/meteor/meteor.git",
+    "branch": "master"
+  },
+  "packages": {
+    "bootstrap3-less": {},
+    "iron-router": {},
+    "bootstrap-3": {},
+    "accounts-ui-bootstrap-3": {},
+    "mini-models": {},
+    "x-editable-bootstrap3": {},
+    "highcharts": {}
+  }
+}

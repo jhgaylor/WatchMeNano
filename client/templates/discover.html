@@ -1,0 +1,29 @@
+<template name="discover">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {{#each nanos}}
+        {{> discover_list_item}}
+      {{/each}}
+    </tbody>
+  </table>
+</template>
+
+<template name="discover_list_item">
+  <tr>
+    <td>{{title}}</td>
+    <td>{{author.email}}</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</template>
