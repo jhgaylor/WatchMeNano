@@ -1,6 +1,6 @@
 Template.discover.helpers({
   nanos: function () {
-    return Nanos.find();
+    return Nanos.find({private:false});
   }
 });
 

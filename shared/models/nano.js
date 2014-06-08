@@ -10,7 +10,19 @@ Nano = (function (_super){
   Nano.collectionName = "Nanos";
   Nano.beforeSave = [
     function (item) {
-      // console.log("Derp, saving");
+      // item.slug = slugify(item.title);
+      var i = 0;
+      while(i > -1){
+        var slug = slugify(item.title);
+        if (i > 0){
+          slug = slug + "-" + i;
+        }
+        if(Nanos.find({slug:slug}).count() === 0 || item.slug === slug){
+          item.slug = slug;
+          break;
+        }
+        i++;
+      }
     }
   ];
 

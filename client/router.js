@@ -12,17 +12,11 @@ Router.map(function () {
   });
 
   this.route('stats', {
-    path: "/stats",
+    path: "/:slug/stats",
     before: [
       function () {
-        var user = Meteor.user();
-        if(user){
-          var nano = Nanos.findOne({author_id: user._id}) || {author_id:user._id};
-          if (! nano._id){
-            Nanos.insert(nano);
-          }
-          Session.set('nano', nano._id);
-        }
+        var nano = Nanos.findOne({slug:this.params.slug});
+        Session.set('nano', nano._id);
       },
     ],
   });
@@ -41,12 +35,27 @@ Router.map(function () {
       function () {
         var user = Meteor.user();
         if(user){
-          var nano = Nanos.findOne({author_id: user._id}) || {author_id:user._id};
+          var nano = Nanos.findOne({author_id: user._id}) || new Nano({author_id:user._id});
           if (! nano._id){
-            Nanos.insert(nano);
+            nano.save();
           }
           Session.set('nano', nano._id);
         }
+      }
+    ],
+    data: function () {
+      var nano_id = Session.get('nano');
+      return Nanos.findOne({_id:nano_id});
+    }
+  });
+
+  this.route('nano_details', {
+    path: "/:slug",
+    before: [
+      function () {
+        var nano = Nanos.findOne({slug:this.params.slug});
+        Session.set('nano', nano._id);
+      
       }
     ],
     data: function () {

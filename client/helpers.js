@@ -71,6 +71,25 @@ Handlebars.registerHelper("prettifyDateTime", function(timestamp) {
   return curr_hour + ":" + curr_minutes + " " +curr_month + "/" + curr_date + "/" + curr_year;
 });
 
+nanoDate = function (timestamp) {
+  if(timestamp === undefined){
+    return "";
+  }
+  if(Match.test(timestamp, String) || Match.test(timestamp, Number)){
+    timestamp = new Date(timestamp);
+  }
+  var curr_date = timestamp.getDate();
+  
+  // if(curr_date < 10){
+  //   curr_date = "0"+curr_date;
+  // }
+  return "Day: " + curr_date;
+};
+
+Handlebars.registerHelper("nanoDate", function(timestamp) {
+  return nanoDate(timestamp);
+});
+
 
 Handlebars.registerHelper("toFixed", function(number, after_decimal) {
   return number.toFixed(after_decimal);

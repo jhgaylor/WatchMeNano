@@ -7,10 +7,12 @@ Template.stats.rendered = function () {
   }).fetch();
 
   var date_categories = _.map(stages, function (e){
-    return e.created;
+    return nanoDate(e.created);
   });
   var word_count_data = _.map(stages, function (e){
-    return e.text.split(" ").length;
+    var txt = e.text;
+    txt = txt.replace(/\s+/g, ' ');
+    return txt.split(" ").length;
   });
   date_categories.unshift(0);
   word_count_data.unshift(0);
@@ -25,25 +27,69 @@ Template.stats.rendered = function () {
   });
 
   var article_count_data = _.map(stages, function (e){
+    var data = {
+      total: 0,
+      a: 0,
+      an: 0,
+      the: 0
+    };
     var words = e.text.split(" ");
-    return _.reduce(words, function (memo, element, index, list) {
+    _.each(words, function (element, index, list) {
       if (element == "the" || element == "a" || element =="an"){
-        return memo + 1;
-      } else {
-        return memo;
+        data[element] += 1;
+        data.total += 1;
       }
-    }, 0);
+    });
+    return data;
 
   });
-  article_count_data.unshift(0);
+  
 
-  $('#articleCountChart').highcharts({
+  $('#articleCountBarChart').highcharts({
+    chart: {
+        type: 'column'
+    },
+    xAxis: {
+      categories: date_categories.slice(1)
+    },
+    series: [{
+      name: "Total",
+      data: _.pluck(article_count_data, 'total')
+    },{
+      name: "a",
+      data: _.pluck(article_count_data, 'a')
+    },{
+      name: "an",
+      data: _.pluck(article_count_data, 'an')
+    },{
+      name: "the",
+      data: _.pluck(article_count_data, 'the')
+    }]
+  });
+
+  article_count_data.unshift({
+    total: 0,
+    a: 0,
+    an: 0,
+    the: 0
+  });
+
+  $('#articleCountLineChart').highcharts({
     xAxis: {
       categories: date_categories
     },
     series: [{
-      name: "Articles",
-      data: article_count_data
+      name: "Total",
+      data: _.pluck(article_count_data, 'total')
+    },{
+      name: "a",
+      data: _.pluck(article_count_data, 'a')
+    },{
+      name: "an",
+      data: _.pluck(article_count_data, 'an')
+    },{
+      name: "the",
+      data: _.pluck(article_count_data, 'the')
     }]
   });
 };

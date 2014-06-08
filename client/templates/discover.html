@@ -20,7 +20,9 @@
 
 <template name="discover_list_item">
   <tr>
-    <td>{{title}}</td>
+    <td>
+      <a href="{{pathFor 'nano_details'}}">{{title}}</a>
+    </td>
     <td>{{author.email}}</td>
     <td></td>
     <td></td>
