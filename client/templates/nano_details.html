@@ -1,0 +1,18 @@
+<template name="nano_details">
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+      <div class="row">
+        <div class="col-sm-12">
+          <h3>Word Count<a href="{{pathFor 'stats'}}" class="btn btn-success col-sm-2 pull-right">See all stats</a></h3>
+        </div>
+      </div>
+      <div id="wordCountChart"></div>
+    </div>
+  </div>
+
+  <h3>Read It</h3>
+  {{#each stages}}
+    <h4>{{prettifyDateTime created}}</h4>
+    <p>{{breaklines text}}</p>
+  {{/each}}
+</template>

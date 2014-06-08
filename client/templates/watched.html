@@ -1,0 +1,31 @@
+<template name="watched">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {{#each nanos}}
+        {{> watched_list_item}}
+      {{/each}}
+    </tbody>
+  </table>
+</template>
+
+<template name="watched_list_item">
+  <tr>
+    <td>
+      <a href="{{pathFor 'nano_details'}}">{{title}}</a>
+    </td>
+    <td>{{author.email}}</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</template>
